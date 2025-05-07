@@ -1,0 +1,36 @@
+<!-- 以下、前のコードに上書きしてください -->
+<div class="result" id="resultBox" style="display:none;"></div>
+
+<script>
+  function calculateScore() {
+    const scores = document.querySelectorAll('input[name="score"]:checked');
+    const total = scores.length;
+    let message = "";
+
+    if (total >= 16) {
+      message = "【高リスク】いますぐ支援が必要な可能性があります。専門機関や信頼できる人に相談を。";
+    } else if (total >= 8) {
+      message = "【中リスク】家庭内に支援が必要な兆候が見られます。できるだけ早く相談先を見つけましょう。";
+    } else if (total >= 1) {
+      message = "【低リスク】いくつか気になる点があります。気軽に相談できる場があると安心です。";
+    } else {
+      message = "特に大きなリスクは見られませんが、心配なことがあれば遠慮なくご相談ください。";
+    }
+
+    const resultBox = document.getElementById("resultBox");
+    resultBox.innerHTML = `
+      <h2>チェック結果：${total} 点</h2>
+      <p>${message}</p>
+      <a href="/help-chat.html" style="
+        display:inline-block;
+        margin-top:15px;
+        padding:10px 20px;
+        background-color:#ff00aa;
+        color:#fff;
+        text-decoration:none;
+        border-radius:8px;
+      ">たすけてボタン → AIチャットに相談</a>
+    `;
+    resultBox.style.display = "block";
+  }
+</script>
