@@ -63,4 +63,66 @@
     <label><input type="checkbox" name="score" value="1"> 最近元気がない</label>
     <label><input type="checkbox" name="score" value="1"> 怒られやすいと感じている</label>
     <label><input type="checkbox" name="score" value="1"> 家に帰りたくなさそう</label>
-    <label><
+    <label><input type="checkbox" name="score" value="1"> 食欲がない・急に痩せた</label>
+    <label><input type="checkbox" name="score" value="1"> 体にアザやケガがある</label>
+    <label><input type="checkbox" name="score" value="1"> 睡眠不足・眠れていない</label>
+    <label><input type="checkbox" name="score" value="1"> 話し相手がいない</label>
+    <label><input type="checkbox" name="score" value="1"> 学校に行きたがらない</label>
+  </div>
+
+  <div class="section">
+    <h2>【保護者の状況】</h2>
+    <label><input type="checkbox" name="score" value="1"> 大声や暴言が多い</label>
+    <label><input type="checkbox" name="score" value="1"> 子どもを無視することがある</label>
+    <label><input type="checkbox" name="score" value="1"> 子育てに疲れている様子がある</label>
+    <label><input type="checkbox" name="score" value="1"> 飲酒・ギャンブルが頻繁</label>
+    <label><input type="checkbox" name="score" value="1"> 離婚や別居で混乱している</label>
+    <label><input type="checkbox" name="score" value="1"> 病気や障害を抱えている</label>
+    <label><input type="checkbox" name="score" value="1"> お金の問題で悩んでいる</label>
+    <label><input type="checkbox" name="score" value="1"> 子どもにきつく当たっている</label>
+  </div>
+
+  <div class="section">
+    <h2>【家庭・環境】</h2>
+    <label><input type="checkbox" name="score" value="1"> 家が片付いていない・不衛生</label>
+    <label><input type="checkbox" name="score" value="1"> 食事が不規則・不十分</label>
+    <label><input type="checkbox" name="score" value="1"> 電気・ガスが止まっていたことがある</label>
+    <label><input type="checkbox" name="score" value="1"> 近所づきあいがない</label>
+    <label><input type="checkbox" name="score" value="1"> 親族や周囲に頼れる人がいない</label>
+    <label><input type="checkbox" name="score" value="1"> 同じ問題が長く続いている</label>
+    <label><input type="checkbox" name="score" value="1"> 何から助けを求めたらいいかわからない</label>
+  </div>
+
+  <button type="button" onclick="calculateScore()">チェック結果を確認</button>
+</form>
+
+<div class="result" id="resultBox" style="display:none;"></div>
+
+<script>
+  function calculateScore() {
+    const scores = document.querySelectorAll('input[name="score"]:checked');
+    const total = scores.length;
+    let message = "";
+
+    if (total >= 16) {
+      message = "【高リスク】いますぐ支援が必要な可能性があります。専門機関や信頼できる人に相談を。";
+    } else if (total >= 8) {
+      message = "【中リスク】家庭内に支援が必要な兆候が見られます。できるだけ早く相談先を見つけましょう。";
+    } else if (total >= 1) {
+      message = "【低リスク】いくつか気になる点があります。気軽に相談できる場があると安心です。";
+    } else {
+      message = "特に大きなリスクは見られませんが、心配なことがあれば遠慮なくご相談ください。";
+    }
+
+    const resultBox = document.getElementById("resultBox");
+    resultBox.innerHTML = `
+      <h2>チェック結果：${total} 点</h2>
+      <p>${message}</p>
+      <a href="/help-chat.html" class="help-button">たすけてボタン → AIチャットに相談</a>
+    `;
+    resultBox.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
